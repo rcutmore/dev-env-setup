@@ -5,6 +5,17 @@
     state: latest
     update_cache: yes
 
+- name: add ppa for sublime text 3
+  apt_repository:
+    repo: 'ppa:webupd8team/sublime-text-3'
+    state: present
+
+- name: install sublime text 3
+  apt:
+    name: sublime-text-installer
+    state: latest
+    update_cache: yes
+
 - name: install qt creator
   apt:
     name: qtcreator
