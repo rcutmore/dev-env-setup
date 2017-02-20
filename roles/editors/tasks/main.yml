@@ -1,4 +1,10 @@
 ---
+- name: install vim
+  apt:
+    name: vim
+    state: latest
+    update_cache: yes
+
 - name: install qt creator
   apt:
     name: qtcreator
