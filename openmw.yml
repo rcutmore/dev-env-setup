@@ -5,10 +5,7 @@
     - { role: editors, project_language: "c++" }
   tasks:
     - name: install project dependencies
-      apt:
-        name: "{{ item }}"
-        state: latest
-        update_cache: yes
+      apt: name={{ item }} state=latest update_cache=yes
       with_items:
         - build-essential
         - cmake
