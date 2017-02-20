@@ -1,0 +1,16 @@
+---
+- name: install git
+  apt:
+    name: git
+    state: latest
+    update_cache: yes
+  register: git_installed
+
+- name: configure git
+  when: git_installed|success
+  become: yes
+  become_user: "{{ project_user }}"
+  template:
+    src: gitconfig.j2
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+  

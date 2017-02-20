@@ -2,6 +2,7 @@
 - name: set up development environment for openmw
   hosts: localhost
   roles:
+    - common
     - { role: editors, project_language: "c++" }
   tasks:
     - name: install project dependencies
