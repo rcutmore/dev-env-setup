@@ -3,4 +3,30 @@
   hosts: localhost
   roles:
     - { role: editors, project_language: "c++" }
+  tasks:
+    - name: install project dependencies
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      with_items:
+        - build-essential
+        - cmake
+        - libavcodec-dev
+        - libavformat-dev
+        - libavutil-dev
+        - libboost-filesystem-dev
+        - libboost-program-options-dev
+        - libboost-system-dev
+        - libboost-thread-dev
+        - libbullet-dev
+        - libmygui-dev
+        - libopenal-dev
+        - libopenscenegraph-dev
+        - libqt4-dev
+        - libqt4-opengl-dev
+        - libsdl2-dev
+        - libswresample-dev
+        - libswscale-dev
+        - libunshield-dev
 
