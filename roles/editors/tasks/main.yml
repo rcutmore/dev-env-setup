@@ -1,0 +1,8 @@
+---
+- name: install qt creator
+  apt:
+    name: qtcreator
+    state: latest
+    update_cache: yes
+  when: project_language == "c++"
+
