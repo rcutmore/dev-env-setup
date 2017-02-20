@@ -1,0 +1,6 @@
+---
+- name: set up development environment for openmw
+  hosts: localhost
+  roles:
+    - { role: editors, project_language: "c++" }
+
