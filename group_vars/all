@@ -1,3 +1,7 @@
 ---
+git:
+  email: enter_git_email_here
+  name: enter_git_name_here
+  username: enter_git_username_here
 project_user: enter_project_user_here
 

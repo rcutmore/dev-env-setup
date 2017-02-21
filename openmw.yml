@@ -28,3 +28,10 @@
         - libswscale-dev
         - libunshield-dev
 
+    - name: fetch openmw repo
+      become: yes
+      become_user: "{{ project_user }}"
+      git:
+        repo: https://github.com/{{ git.username }}/openmw.git
+        dest: "{{ ansible_env.HOME }}/Projects/openmw"
+
