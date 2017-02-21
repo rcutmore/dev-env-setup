@@ -13,4 +13,14 @@
   template:
     src: gitconfig.j2
     dest: "{{ ansible_env.HOME }}/.gitconfig"
+
+- name: create directory for projects
+  become: yes
+  become_user: "{{ project_user }}"
+  file:
+    path: "{{ ansible_env.HOME }}/Projects"
+    state: directory
+    owner: "{{ project_user }}"
+    group: "{{ project_user }}"
+    mode: 0755
   
