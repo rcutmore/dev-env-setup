@@ -5,6 +5,11 @@
     - common
     - { role: editors, project_language: "c++" }
   tasks:
+    - name: add openmw ppa
+      apt_repository:
+        repo: 'ppa:openmw/openmw'
+        state: present
+
     - name: install project dependencies
       apt: name={{ item }} state=latest update_cache=yes
       with_items:
@@ -20,7 +25,7 @@
         - libbullet-dev
         - libmygui-dev
         - libopenal-dev
-        - libopenscenegraph-dev
+        - libopenscenegraph-3.4-dev
         - libqt4-dev
         - libqt4-opengl-dev
         - libsdl2-dev
