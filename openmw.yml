@@ -40,3 +40,34 @@
         repo: https://github.com/{{ git.username }}/openmw.git
         dest: "{{ ansible_env.HOME }}/Projects/openmw"
 
+    - name: create directory for morrowind game files
+      become: yes
+      become_user: "{{ project_user }}"
+      file:
+        path: "{{ ansible_env.HOME }}/Games"
+        state: directory
+
+    - name: check if morrowind game files exist
+      become: yes
+      become_user: "{{ project_user }}"
+      stat: path={{ ansible_env.HOME }}/Games/Morrowind
+      register: game_files
+
+    - name: download morrowind game files
+      become: yes
+      become_user: "{{ project_user }}"
+      get_url:
+        url: "{{ urls.morrowind_game_files }}"
+        dest: "{{ ansible_env.HOME }}/Games/morrowind-data.tar.gz"
+        force: no
+      when: game_files.stat.exists == False
+
+    - name: unpack game files
+      become: yes
+      become_user: "{{ project_user }}"
+      unarchive:
+        src: "{{ ansible_env.HOME }}/Games/morrowind-data.tar.gz"
+        dest: "{{ ansible_env.HOME }}/Games"
+        creates: "{{ ansible_env.HOME }}/Games/Morrowind"
+      when: game_files.stat.exists == False
+

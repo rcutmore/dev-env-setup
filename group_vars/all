@@ -4,4 +4,6 @@ git:
   name: enter_git_name_here
   username: enter_git_username_here
 project_user: enter_project_user_here
+urls:
+  morrowind_game_files: enter_game_files_url_here
 
