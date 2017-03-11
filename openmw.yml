@@ -1,9 +1,11 @@
 ---
 - name: set up development environment for openmw
   hosts: localhost
+
   roles:
     - common
     - { role: editors, project_language: "c++" }
+
   tasks:
     - name: add openmw ppa
       apt_repository:
@@ -39,6 +41,14 @@
       git:
         repo: https://github.com/{{ git.username }}/openmw.git
         dest: "{{ ansible_env.HOME }}/Projects/openmw"
+
+    - name: add upstream repo
+      become: yes
+      become_user: "{{ project_user }}"
+      shell: git remote add upstream https://github.com/openmw/openmw.git
+      args:
+        chdir: "{{ ansible_env.HOME }}/Projects/openmw"
+      ignore_errors: yes
 
     - name: create directory for morrowind game files
       become: yes
