@@ -1,5 +1,8 @@
 ---
 - name: install git
+  become: yes
+  become_method: sudo
+  become_user: root
   apt:
     name: git
     state: latest
@@ -9,6 +12,7 @@
 - name: configure git
   when: git_installed|success
   become: yes
+  become_method: sudo
   become_user: "{{ project_user }}"
   template:
     src: gitconfig.j2
@@ -16,6 +20,7 @@
 
 - name: create directory for projects
   become: yes
+  become_method: sudo
   become_user: "{{ project_user }}"
   file:
     path: "{{ ansible_env.HOME }}/Projects"
