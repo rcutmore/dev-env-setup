@@ -1,22 +1,23 @@
 ---
 - name: install vim
+  become: yes
+  become_method: sudo
+  become_user: root
   apt:
     name: vim
     state: latest
     update_cache: yes
 
-- name: add ppa for sublime text 3
-  apt_repository:
-    repo: 'ppa:webupd8team/sublime-text-3'
-    state: present
-
-- name: install sublime text 3
-  apt:
-    name: sublime-text-installer
-    state: latest
-    update_cache: yes
+- name: install visual studio code
+  become: yes
+  become_method: sudo
+  become_user: root
+  command: snap install --classic vscode
 
 - name: install qt creator
+  become: yes
+  become_method: sudo
+  become_user: root
   apt:
     name: qtcreator
     state: latest
