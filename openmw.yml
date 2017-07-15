@@ -8,11 +8,17 @@
 
   tasks:
     - name: add openmw ppa
+      become: yes
+      become_method: sudo
+      become_user: root
       apt_repository:
         repo: 'ppa:openmw/openmw'
         state: present
 
     - name: install project dependencies
+      become: yes
+      become_method: sudo
+      become_user: root
       apt: name={{ item }} state=latest update_cache=yes
       with_items:
         - build-essential
@@ -37,6 +43,7 @@
 
     - name: fetch openmw repo
       become: yes
+      become_method: sudo
       become_user: "{{ project_user }}"
       git:
         repo: https://github.com/{{ git.username }}/openmw.git
@@ -44,6 +51,7 @@
 
     - name: add upstream repo
       become: yes
+      become_method: sudo
       become_user: "{{ project_user }}"
       shell: git remote add upstream https://github.com/openmw/openmw.git
       args:
@@ -52,6 +60,7 @@
 
     - name: create directory for morrowind game files
       become: yes
+      become_method: sudo
       become_user: "{{ project_user }}"
       file:
         path: "{{ ansible_env.HOME }}/Games"
@@ -59,12 +68,14 @@
 
     - name: check if morrowind game files exist
       become: yes
+      become_method: sudo
       become_user: "{{ project_user }}"
       stat: path={{ ansible_env.HOME }}/Games/Morrowind
       register: game_files
 
     - name: download morrowind game files
       become: yes
+      become_method: sudo
       become_user: "{{ project_user }}"
       get_url:
         url: "{{ urls.morrowind_game_files }}"
